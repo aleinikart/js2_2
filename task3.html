@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task3</title>
+    <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<div id="gallery"></div>
+<div id="wideview">
+    <img src="#" alt="Изображение не загружено">
+</div>
+<script>
+    window.onload = () => {
+        let gal = document.getElementById('gallery');
+        let wideWiev = document.getElementById('wideview');
+        let wideImg = document.querySelector('#wideview img');
+        wideWiev.addEventListener('click', () => {
+            wideWiev.classList.remove('active');
+        });
+        fetch('pics.json')
+            .then(result => result.json())
+            .then(pics => {
+                    for (let pic in pics){
+                        gal.innerHTML += `<img src="${pics[pic].src}" alt="${pics[pic].alt}">`;
+                    }
+            })
+            .then(
+                items = () =>{
+                    let items = document.querySelectorAll('#gallery img');
+                    for(let item in items){
+                        items[item].onclick = () => {
+                            wideImg.alt = items[item].alt;
+                            wideImg.src = items[item].src;
+                            wideWiev.classList.add('active');
+
+                        };
+
+                    }
+                }
+
+
+            )
+    }
+
+</script>
+</body>
+</html>

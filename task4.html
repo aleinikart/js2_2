@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>task4</title>
+    <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<input type="text" id="field" placeholder="Введите данные">
+<button id="send">Отправить</button>
+
+<script>
+    window.onload = () => {
+
+
+        let btn = document.getElementById('send');
+        getAnswer = (datafile) => {
+            fetch(datafile)
+                .then(result => result.json())
+                .then(answer => console.log(answer));
+        }
+        btn.onclick = () => {
+            let textVal = document.getElementById('field').value;
+            if(textVal == false || textVal == ''){
+                getAnswer('./error.json')
+            } else {
+                getAnswer('./success.json')
+            }
+        }
+
+    }
+
+
+</script>
+</body>
+</html>
